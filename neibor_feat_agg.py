@@ -14,7 +14,7 @@ dir_point = './dataset/POINT/'
 target = './res/persduo/'
 
 k=2
-deletearea = 40
+deletearea = 25
 imlist = os.listdir(os.path.join(dir_im, '0_0'))
 if not os.path.exists(target):
     os.mkdir(target)
@@ -30,7 +30,7 @@ for im in imlist:
     for i in range(k):
         for j in range(k):
             map = cv2.imread(os.path.join(dir_im + '{}_{}'.format(i,j), im))
-            map = map[:,:,0]
+            map = map[:492,:492,0]
             ret, map = cv2.threshold(map, 0, 255, cv2.THRESH_OTSU)
 
             votemap += (map / mean)

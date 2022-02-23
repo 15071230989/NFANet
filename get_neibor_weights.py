@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 import warnings
 warnings.filterwarnings('ignore')
 from time import time
-from networks.unet import UNetNeighbor
+from networks.unet import UNet, UNetNeighbor
 from compute import IOUMetric
 from myframework import MyFrame
 from loss import dice_bce_loss
@@ -32,7 +32,7 @@ for i in range(k):
 
         SHAPE = (512,512)
         NAME = NETNAME + '_{}_{}'.format(i,j)
-        solver = MyFrame(UNetNeighbor, dice_bce_loss , 0.0001)
+        solver = MyFrame(UNet, dice_bce_loss , 0.0001)
 
         dir_img =  os.path.join(dir_im + '{}_{}/'.format(i,j))
 

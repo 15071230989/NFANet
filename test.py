@@ -11,7 +11,7 @@ import cv2
 import os
 import numpy as np
 
-from networks.unet import UNetNeighbor
+from networks.unet import UNet
 
 
 BATCHSIZE_PER_CARD = 4
@@ -35,7 +35,7 @@ class TTAFrame():
         if evalmode:
             self.net.eval()
             img = cv2.imread(path)
-            img = cv2.resize(img, (256, 256), interpolation=cv2.INTER_CUBIC)
+            img = cv2.resize(img, (512, 512), interpolation=cv2.INTER_CUBIC)
             mask,prec = self.pred_mask(img)
             return mask,prec
 
@@ -47,7 +47,7 @@ source = './dataset/tr_im/'
 target = './res/subout/'
 NETNAME = 'recur'
 val = os.listdir(source)
-solver = TTAFrame(UNetNeighbor)
+solver = TTAFrame(UNet)
 NAME = 'weights/' + NETNAME
 for i in range(k):
     for j in range(k):

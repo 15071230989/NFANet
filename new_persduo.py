@@ -12,7 +12,8 @@ import numpy as np
 dir_im = './res/subout/'
 dir_point = './dataset/POINT/'
 target = './res/out/'
-deletearea = 40
+
+deletearea = 25
 k = 2
 imlist = os.listdir(os.path.join(dir_im, '0_0'))
 if not os.path.exists(target):

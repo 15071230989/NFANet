@@ -78,7 +78,8 @@ class UNet(nn.Module):
         self.final = nn.Conv2d(filters[0], out_ch, kernel_size=3, padding=1)
 
     def forward(self, x):
-        x0 = self.conv0_0(x)  # h,w,n1
+        x_ = self.Up(x)
+        x0 = self.conv0_0(x_)  # h,w,n1
         x1 = self.conv1_0(self.pool(x0))  # h/2,w/2,n2
         x2 = self.conv2_0(self.pool(x1))  # h/4,w/4,n3
         x3 = self.conv3_0(self.pool(x2))  # h/8,w/8,n4
@@ -94,7 +95,6 @@ class UNet(nn.Module):
         perc_map1 = torch.max(x6, dim=1)[0]
         perc_map2 = torch.max(x7, dim=1)[0]
 
-        # print(perc_map.shape)
         return F.sigmoid(output), (perc_map0, perc_map1, perc_map2)
 
 
@@ -130,6 +130,8 @@ class UNetNeighbor(nn.Module):
         x8 = self.conv8_0(torch.cat([self.Up(x7), self.Up(x1)], 1))  # h*2,w*2,n1
 
         output = self.final(x8)
+        # perc_map = torch.max(x2,dim=1)[0]
+        # perc_map1 = torch.min(x2,dim=1)[0]
 
         perc_map0 = torch.max(x5, dim=1)[0]
         perc_map1 = torch.max(x6, dim=1)[0]
