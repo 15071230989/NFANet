@@ -25,7 +25,7 @@ import cv2
 k = 2
 dir_im = './dataset/tr_im/'
 dir_mask = './dataset/POINT/'
-NETNAME = 'Persduo_net'
+NETNAME = 'Pseudo_net'
 
 for i in range(k):
     for j in range(k):

@@ -24,7 +24,7 @@ import cv2
 
 k = 2
 dir_im = './dataset/tr_im/'
-dir_mask = './dataset/persduo/'
+dir_mask = './dataset/pseudo/'
 NETNAME = 'recur'
 
 for i in range(k):
